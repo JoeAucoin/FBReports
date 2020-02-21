@@ -1,0 +1,57 @@
+﻿
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_Distinct_Clients_By_City]    Script Date: 10/29/2019 1:30:51 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GIBS_FBReports_Distinct_Clients_By_City]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[GIBS_FBReports_Distinct_Clients_By_City]
+GO
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_Distinct_Clients_By_City]    Script Date: 10/29/2019 1:30:51 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GIBS_FBReports_Distinct_Clients_By_City]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[GIBS_FBReports_Distinct_Clients_By_City] AS' 
+END
+GO
+
+ALTER PROCEDURE  [dbo].[GIBS_FBReports_Distinct_Clients_By_City] 
+( 
+	@StartDate datetime,
+	@EndDate datetime,
+	@PortalID int,
+    @ServiceLocation varchar(50)
+)
+AS
+
+ --CreatedOnDate
+begin 
+if(@ServiceLocation='0' or @ServiceLocation is null)
+begin
+	set @ServiceLocation=null;
+end  
+
+-- DETAILS
+
+SELECT DISTINCT 
+                      GIBS_FBClients.ClientID, GIBS_FBClients.ClientFirstName + ' ' + GIBS_FBClients.ClientLastName AS ClientFullName, GIBS_FBClients.ClientLastName, 
+					  GIBS_FBClients.CreatedOnDate, GIBS_FBClients.Latitude, GIBS_FBClients.Longitude, 
+                      UPPER(GIBS_FBClients.ClientCity) AS ClientCity, UPPER(GIBS_FBClients.ClientTown) AS ClientTown, GIBS_FBClients.ClientZipCode, 
+                      vw_GIBS_FBClients.CLIENT_AgeGroup, vw_GIBS_FBClients.ClientAdult, vw_GIBS_FBClients.Client65Plus, vw_GIBS_FBClients.ClientChild, 
+                      vw_GIBS_FBClients.ClientNoDOB, vw_GIBS_FBClients.AFM_Adults, vw_GIBS_FBClients.AFM_65Plus, vw_GIBS_FBClients.AFM_Children, 
+                      vw_GIBS_FBClients.AFM_NoDOB, vw_GIBS_FBClients.HouseholdTotal
+FROM         GIBS_FBClients INNER JOIN
+                      vw_GIBS_FBClients ON GIBS_FBClients.ClientID = vw_GIBS_FBClients.ClientID LEFT OUTER JOIN
+                      GIBS_FBClientsVisits ON GIBS_FBClients.ClientID = GIBS_FBClientsVisits.ClientID
+WHERE     (GIBS_FBClientsVisits.VisitDate BETWEEN CONVERT(DATETIME, @StartDate, 102) AND CONVERT(DATETIME, @EndDate, 102)) AND 
+                      (GIBS_FBClients.PortalID = @PortalID)
+					  AND GIBS_FBClientsVisits.VisitNumBags > 0
+					  and  (@ServiceLocation is null or GIBS_FBClientsVisits.ServiceLocation=@ServiceLocation)
+ORDER BY ClientCity, ClientTown, GIBS_FBClients.ClientLastName
+
+
+end
+GO

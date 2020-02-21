@@ -1,0 +1,56 @@
+﻿
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_Food_Inventory]    Script Date: 02/03/2014 06:36:30 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GIBS_FBReports_Food_Inventory]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[GIBS_FBReports_Food_Inventory]
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_Food_Inventory]    Script Date: 02/03/2014 06:36:30 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE  [dbo].[GIBS_FBReports_Food_Inventory] 
+( 
+	@StartDate datetime,
+	@EndDate datetime,
+	@PortalID int
+)
+AS
+
+ 
+begin 
+
+-- DETAILS
+
+
+--		WHERE     (GIBS_FBClientsVisits.VisitDate between  CONVERT(DATETIME, @StartDate, 102) AND CONVERT(DATETIME, @EndDate, 102))
+SELECT     
+GIBS_FBLineItems.LineItemID,
+Convert(DateTime, Convert(CHAR(12), GIBS_FBInvoices.InvoiceDate, 12)) AS InvoiceDate
+, GIBS_FBSuppliers.SupplierName, GIBS_FBProductCategory.ProductCategory, 
+GIBS_FBProducts.ProductName, 
+GIBS_FBLineItems.Cases, 
+GIBS_FBLineItems.CountPerCase, 
+                      GIBS_FBLineItems.PricePerCase, 
+                      GIBS_FBLineItems.WeightPerCase, 
+                      GIBS_FBLineItems.WeightPerCase * GIBS_FBLineItems.Cases AS TotalProductWeight, 
+                      GIBS_FBLineItems.PricePerCase * GIBS_FBLineItems.Cases AS TotalProductCost
+FROM         GIBS_FBInvoices INNER JOIN
+                      GIBS_FBSuppliers ON GIBS_FBInvoices.SupplierID = GIBS_FBSuppliers.SupplierID INNER JOIN
+                      GIBS_FBProductCategory INNER JOIN
+                      GIBS_FBProducts INNER JOIN
+                      GIBS_FBLineItems ON GIBS_FBProducts.ProductID = GIBS_FBLineItems.ProductID ON 
+                      GIBS_FBProductCategory.ProductCategoryID = GIBS_FBProducts.ProductCategoryID ON GIBS_FBInvoices.InvoiceID = GIBS_FBLineItems.InvoiceID
+WHERE     (GIBS_FBInvoices.InvoiceDate BETWEEN CONVERT(DATETIME, @StartDate, 102) AND CONVERT(DATETIME, @EndDate, 102))
+			AND GIBS_FBInvoices.PortalID = @PortalID
+
+ORDER BY GIBS_FBSuppliers.SupplierName, GIBS_FBProductCategory.ProductCategory		
+
+
+
+end
+GO

@@ -1,0 +1,219 @@
+﻿<dotnetnuke type="Package" version="5.0">
+  <packages><package name="GIBS.FBReports" type="Module" version="1.0.21">
+  <friendlyName>GIBS Food Bank Reports</friendlyName>
+  <description>GIBS Food Bank Reporting Module</description>
+  <iconFile />
+  <owner>
+    <name>Joseph M Aucoin</name>
+    <organization>Global Internet Business Solutions</organization>
+    <url>www.gibs.com</url>
+    <email>jaucoin@gibs.com</email>
+  </owner>
+  <license>&lt;h1&gt;Global Internet Business Solutions (GIBS) Custom DNN Modules&lt;/h1&gt;
+</license>
+  <releaseNotes>This package has no Release Notes</releaseNotes>
+  <components>
+    <component type="Script">
+      <scripts>
+        <basePath>DesktopModules\GIBS\FBReports</basePath>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.00.SqlDataProvider</name>
+          <version>01.00.00</version>
+        </script>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.01.SqlDataProvider</name>
+          <version>01.00.01</version>
+        </script>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.03.SqlDataProvider</name>
+          <version>01.00.03</version>
+        </script>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.05.SqlDataProvider</name>
+          <version>01.00.05</version>
+        </script>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.06.SqlDataProvider</name>
+          <version>01.00.06</version>
+        </script>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.07.SqlDataProvider</name>
+          <version>01.00.07</version>
+        </script>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.08.SqlDataProvider</name>
+          <version>01.00.08</version>
+        </script>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.09.SqlDataProvider</name>
+          <version>01.00.09</version>
+        </script>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.10.SqlDataProvider</name>
+          <version>01.00.10</version>
+        </script>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.13.SqlDataProvider</name>
+          <version>01.00.13</version>
+        </script>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.14.SqlDataProvider</name>
+          <version>01.00.14</version>
+        </script>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.18.SqlDataProvider</name>
+          <version>01.00.18</version>
+        </script>        
+        <script type="UnInstall">
+          <name>Uninstall.SqlDataProvider</name>
+          <version>1.0.21</version>
+        </script>
+      </scripts>
+    </component>
+    <component type="ResourceFile">
+      <resourceFiles>
+        <basePath>DesktopModules/GIBS/FBReports</basePath>
+        <resourceFile>
+          <name>Resources.zip</name>
+        </resourceFile>
+      </resourceFiles>
+    </component>    
+    <component type="Module">
+      <desktopModule>
+        <moduleName>GIBS.FBReports</moduleName>
+        <foldername>GIBS/FBReports</foldername>
+        <businessControllerClass />
+        <supportedFeatures />
+        <moduleDefinitions>
+          <moduleDefinition>
+            <friendlyName>GIBS Food Bank Reports</friendlyName>
+            <definitionName>GIBS Food Bank Reports</definitionName>
+            <defaultCacheTime>0</defaultCacheTime>
+            <moduleControls>
+              <moduleControl>
+                <controlKey />
+                <controlSrc>DesktopModules/GIBS/FBReports/ViewFBReports.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle />
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>AFMAgeReport</controlKey>
+                <controlSrc>DesktopModules/GIBS/FBReports/Report_AFM_Age.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle>Household Members by Age Report</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>4</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>DailyReport</controlKey>
+                <controlSrc>DesktopModules/GIBS/FBReports/DailyReport.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle>Client Visit Report</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>1</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>MapReport</controlKey>
+                <controlSrc>DesktopModules/GIBS/FBReports/MapReport.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle>Map Report</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>1</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>DistinctClientsReport</controlKey>
+                <controlSrc>DesktopModules/GIBS/FBReports/DistinctClientsReport.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle>Distinct Clients Report</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>2</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>FoodReport</controlKey>
+                <controlSrc>DesktopModules/GIBS/FBReports/FoodReport.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle>Food Inventory Report</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>5</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>HouseholdTotal_Report</controlKey>
+                <controlSrc>DesktopModules/GIBS/FBReports/HouseholdTotal_Report.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle>Household Total Report</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>NewClientsReport</controlKey>
+                <controlSrc>DesktopModules/GIBS/FBReports/NewClientsReport.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle>New Clients Report</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>1</viewOrder>
+              </moduleControl>
+              <moduleControl>
+                <controlKey>Settings</controlKey>
+                <controlSrc>DesktopModules/GIBS/FBReports/Settings.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle>Module Settings</controlTitle>
+                <controlType>Edit</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>0</viewOrder>
+              </moduleControl>
+            </moduleControls>
+          </moduleDefinition>
+        </moduleDefinitions>
+      </desktopModule>
+    </component>
+    <component type="Assembly">
+      <assemblies>
+        <basePath>bin</basePath>
+        <assembly>
+          <name>GIBS.Modules.FBReports.dll</name>
+        </assembly>
+      </assemblies>
+    </component>
+  </components>
+</package></packages>
+</dotnetnuke>

@@ -1,0 +1,85 @@
+﻿
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_AFM_Age]    Script Date: 11/05/2013 05:41:07 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GIBS_FBReports_AFM_Age]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[GIBS_FBReports_AFM_Age]
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_AFM_Age]    Script Date: 11/05/2013 05:41:07 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+CREATE PROCEDURE  [dbo].[GIBS_FBReports_AFM_Age] 
+( 
+	@StartDate datetime,
+	@EndDate datetime, 
+	@MinAge int, 
+	@MaxAge int, 
+	@PortalID int
+)
+AS
+
+ 
+begin 
+
+--ADDITIONAL FAMILY MEMBERS
+
+SELECT  ClAddFamMemID,    GIBS_FBClients.ClientID, 
+GIBS_FBClientsAddFamMem.ClAddFamMemFirstName,
+GIBS_FBClientsAddFamMem.ClAddFamMemLastName, 
+ 
+CASE WHEN ClAddFamMemDOB IS NULL THEN '01/01/1901' ELSE ClAddFamMemDOB END AS ClAddFamMemDOB,
+ 
+cast(dbo.fn_GIBS_FBClients_GetAge(ClAddFamMemDOB,GetDate()) as INT) AS AFM_Age,
+
+CASE WHEN AFMDOBVerify = 0 THEN 'False' ELSE 'True' END AS ChildVerify,
+ AFMDOBVerify ,
+COALESCE(AFMGender,'') as AFMGender,
+ 
+ClientFirstName, 
+  
+COALESCE(ClientMiddleInitial,'') as ClientMiddleInitial,
+ClientLastName,
+
+ClientAddress, 
+COALESCE(ClientUnit,'') as ClientUnit,
+ClientCity, 
+ClientTown, 
+ClientState, 
+ClientZipCode
+   	
+from dbo.GIBS_FBClients		
+
+INNER JOIN GIBS_FBClientsAddFamMem 
+ON GIBS_FBClients.ClientID = GIBS_FBClientsAddFamMem.ClientID 
+ 		 
+ 		 	
+ WHERE PortalId =  @PortalID 
+ AND 
+ 
+ EXISTS( SELECT     
+		 null 
+		From dbo.GIBS_FBClientsVisits
+		where  GIBS_FBClientsVisits.ClientID = GIBS_FBClients.ClientID
+		AND (GIBS_FBClientsVisits.VisitDate between  CONVERT(DATETIME, @StartDate, 102) AND CONVERT(DATETIME, @EndDate, 102))	
+		)
+
+--AND cast(dbo.fn_GIBS_FBClients_GetAge(ClAddFamMemDOB,GetDate()) as INT) <= 14
+AND (cast(dbo.fn_GIBS_FBClients_GetAge(ClAddFamMemDOB,GetDate()) as INT) between @MinAge and @MaxAge )
+
+	ORDER BY 
+	
+	GIBS_FBClients.ClientLastName
+
+
+
+
+
+end
+
+GO

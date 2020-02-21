@@ -1,0 +1,97 @@
+﻿
+/****** Object:  View [dbo].[vw_GIBS_FBClients]    Script Date: 11/30/2014 04:34:57 ******/
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vw_GIBS_FBClients]'))
+DROP VIEW [dbo].[vw_GIBS_FBClients]
+GO
+
+
+
+/****** Object:  View [dbo].[vw_GIBS_FBClients]    Script Date: 11/30/2014 04:34:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+-- optimized
+CREATE VIEW [dbo].[vw_GIBS_FBClients]
+AS
+SELECT DISTINCT 
+                      TOP (100) PERCENT ClientID, 
+                       dbo.fn_GIBS_FBClients_GetAgeGroup(ClientDOB, GETDATE()) AS CLIENT_AgeGroup, 
+                      (CASE dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClients.ClientDOB, GetDate()) WHEN 'Adult' THEN 1 ELSE 0 END) AS ClientAdult, 
+                      (CASE dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClients.ClientDOB, GetDate()) WHEN '65 Plus' THEN 1 ELSE 0 END) AS Client65Plus, 
+                      (CASE dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClients.ClientDOB, GetDate()) WHEN 'Children' THEN 1 ELSE 0 END) AS ClientChild, 
+                      (CASE dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClients.ClientDOB, GetDate()) WHEN 'No DOB' THEN 1 ELSE 0 END) AS ClientNoDOB, CAST
+                          ((SELECT     COUNT(dbo.fn_GIBS_FBClients_GetAgeGroup(ClAddFamMemDOB, GETDATE())) AS Expr1
+                              FROM         dbo.GIBS_FBClientsAddFamMem
+                              WHERE     (ClientID = dbo.GIBS_FBClients.ClientID) AND (dbo.fn_GIBS_FBClients_GetAgeGroup(ClAddFamMemDOB, GETDATE()) = 'Adult')) AS INT) AS AFM_Adults, 
+                      CAST
+                          ((SELECT     COUNT(dbo.fn_GIBS_FBClients_GetAgeGroup(ClAddFamMemDOB, GETDATE())) AS Expr1
+                              FROM         dbo.GIBS_FBClientsAddFamMem AS GIBS_FBClientsAddFamMem_4
+                              WHERE     (ClientID = dbo.GIBS_FBClients.ClientID) AND (dbo.fn_GIBS_FBClients_GetAgeGroup(ClAddFamMemDOB, GETDATE()) = '65 Plus')) AS INT) 
+                      AS AFM_65Plus, CAST
+                          ((SELECT     COUNT(dbo.fn_GIBS_FBClients_GetAgeGroup(ClAddFamMemDOB, GETDATE())) AS Expr1
+                              FROM         dbo.GIBS_FBClientsAddFamMem AS GIBS_FBClientsAddFamMem_3
+                              WHERE     (ClientID = dbo.GIBS_FBClients.ClientID) AND (dbo.fn_GIBS_FBClients_GetAgeGroup(ClAddFamMemDOB, GETDATE()) = 'Children')) AS INT) 
+                      AS AFM_Children, CAST
+                          ((SELECT     COUNT(dbo.fn_GIBS_FBClients_GetAgeGroup(ClAddFamMemDOB, GETDATE())) AS Expr1
+                              FROM         dbo.GIBS_FBClientsAddFamMem AS GIBS_FBClientsAddFamMem_2
+                              WHERE     (ClientID = dbo.GIBS_FBClients.ClientID) AND (dbo.fn_GIBS_FBClients_GetAgeGroup(ClAddFamMemDOB, GETDATE()) = 'No DOB')) AS INT) 
+                      AS AFM_NoDOB, CAST
+                          ((SELECT     COUNT(ClAddFamMemID) AS Expr1
+                              FROM         dbo.GIBS_FBClientsAddFamMem AS GIBS_FBClientsAddFamMem_1
+                              WHERE     (ClientID = dbo.GIBS_FBClients.ClientID)) AS INT) + 1 AS HouseholdTotal
+FROM         dbo.GIBS_FBClients
+--WHERE     (PortalID = 0)
+ORDER BY ClientID
+
+GO
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_Distinct_Clients_By_City]    Script Date: 11/30/2014 04:35:53 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GIBS_FBReports_Distinct_Clients_By_City]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[GIBS_FBReports_Distinct_Clients_By_City]
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_Distinct_Clients_By_City]    Script Date: 11/30/2014 04:35:53 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE  [dbo].[GIBS_FBReports_Distinct_Clients_By_City] 
+( 
+	@StartDate datetime,
+	@EndDate datetime,
+	@PortalID int
+)
+AS
+
+ 
+begin 
+
+-- DETAILS
+
+SELECT DISTINCT 
+                      GIBS_FBClients.ClientID, GIBS_FBClients.ClientFirstName + ' ' + GIBS_FBClients.ClientLastName AS ClientFullName, GIBS_FBClients.ClientLastName, 
+                      UPPER(GIBS_FBClients.ClientCity) AS ClientCity, UPPER(GIBS_FBClients.ClientTown) AS ClientTown, GIBS_FBClients.ClientZipCode, 
+                      vw_GIBS_FBClients.CLIENT_AgeGroup, vw_GIBS_FBClients.ClientAdult, vw_GIBS_FBClients.Client65Plus, vw_GIBS_FBClients.ClientChild, 
+                      vw_GIBS_FBClients.ClientNoDOB, vw_GIBS_FBClients.AFM_Adults, vw_GIBS_FBClients.AFM_65Plus, vw_GIBS_FBClients.AFM_Children, 
+                      vw_GIBS_FBClients.AFM_NoDOB, vw_GIBS_FBClients.HouseholdTotal
+FROM         GIBS_FBClients INNER JOIN
+                      vw_GIBS_FBClients ON GIBS_FBClients.ClientID = vw_GIBS_FBClients.ClientID LEFT OUTER JOIN
+                      GIBS_FBClientsVisits ON GIBS_FBClients.ClientID = GIBS_FBClientsVisits.ClientID
+WHERE     (GIBS_FBClientsVisits.VisitDate BETWEEN CONVERT(DATETIME, @StartDate, 102) AND CONVERT(DATETIME, @EndDate, 102)) AND 
+                      (GIBS_FBClients.PortalID = @PortalID)
+ORDER BY ClientCity, ClientTown, GIBS_FBClients.ClientLastName
+
+
+end
+GO

@@ -1,0 +1,290 @@
+﻿/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_New_Clients_Report]    Script Date: 03/23/2013 06:44:12 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER OFF
+GO
+
+CREATE PROCEDURE  [dbo].[GIBS_FBReports_New_Clients_Report] 
+( 
+	@StartDate datetime,
+	@EndDate datetime,
+	@PortalID int
+)
+AS
+
+ 
+begin 
+
+-- DETAILS
+
+SELECT     GIBS_FBClients.ClientID, 
+		GIBS_FBClients.ClientFirstName + ' ' + GIBS_FBClients.ClientLastName AS ClientFullName,
+		
+		UPPER(GIBS_FBClients.ClientCity) AS ClientCity, 
+		UPPER(GIBS_FBClients.ClientTown) AS ClientTown,
+
+	GIBS_FBClients.ClientZipCode, 
+	 
+	 GIBS_FBClients.CreatedOnDate,
+	 
+	CONVERT(varchar,GIBS_FBClients.CreatedOnDate,101) as CreatedOnDate, 
+	 
+	 cast(dbo.fn_GIBS_FBClients_GetAge(GIBS_FBClients.ClientDOB,GetDate()) as INT) AS ClientAge,
+	 
+	 
+	 
+	 cast((SELECT     
+			 count(dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate())) 
+			From GIBS_FBClientsAddFamMem
+			where  GIBS_FBClientsAddFamMem.ClientID = GIBS_FBClients.ClientID
+			AND dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate()) = 'Adult'
+			) as INT) As AFM_Adults,
+			
+cast((SELECT     
+			 count(dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate())) 
+			From GIBS_FBClientsAddFamMem
+			where  GIBS_FBClientsAddFamMem.ClientID = GIBS_FBClients.ClientID
+			AND dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate()) = '65 Plus'
+			) as INT) As AFM_65Plus,		
+
+cast((SELECT     
+			 count(dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate())) 
+			From GIBS_FBClientsAddFamMem
+			where  GIBS_FBClientsAddFamMem.ClientID = GIBS_FBClients.ClientID
+			AND dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate()) = 'Children'
+			) as INT) As AFM_Children,		
+						
+			
+cast((SELECT     
+			 count(dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate())) 
+			From GIBS_FBClientsAddFamMem
+			where  GIBS_FBClientsAddFamMem.ClientID = GIBS_FBClients.ClientID
+			AND dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate()) = 'No DOB'
+			) as INT) As AFM_NoDOB,
+	 
+ 		cast((SELECT     
+			 count(ClAddFamMemID) 
+			From GIBS_FBClientsAddFamMem
+			where  GIBS_FBClientsAddFamMem.ClientID = GIBS_FBClients.ClientID) as INT) + 1 As HouseholdTotal
+	 
+	FROM         GIBS_FBClients 
+	
+	--CreatedOnDate
+	
+	--	WHERE     (GIBS_FBClients.CreatedOnDate >=  CONVERT(DATETIME, @CreatedOnDate, 102))
+	WHERE     (GIBS_FBClients.CreatedOnDate between  CONVERT(DATETIME, @StartDate, 102) AND CONVERT(DATETIME, @EndDate, 102))	
+		
+		AND (GIBS_FBClients.PortalID = @PortalID)
+
+	ORDER BY GIBS_FBClients.ClientCity, GIBS_FBClients.ClientTown, GIBS_FBClients.ClientLastName
+
+end
+GO
+
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_Age_Groups_AFM]    Script Date: 03/23/2013 06:44:56 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER OFF
+GO
+
+ALTER PROCEDURE  [dbo].[GIBS_FBReports_Age_Groups_AFM] 
+( 
+	@StartDate datetime,
+	@EndDate datetime, 
+	@PortalID int
+)
+AS
+
+ 
+begin 
+
+--ADDITIONAL FAMILY MEMBERS
+
+	SELECT     
+	                              
+	count( dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAFM.ClAddFamMemDOB,GetDate())) as AFM_AgeGroupSum,                             
+	dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAFM.ClAddFamMemDOB,GetDate()) As AFM_AgeGroup                             
+	                    
+	FROM         GIBS_FBClients 
+			INNER JOIN  GIBS_FBClientsVisits ON GIBS_FBClients.ClientID = GIBS_FBClientsVisits.ClientID 
+			INNER JOIN  GIBS_FBClientsAddFamMem AS GIBS_FBClientsAFM ON GIBS_FBClients.ClientID = GIBS_FBClientsAFM.ClientID
+		WHERE     (GIBS_FBClientsVisits.VisitDate between  CONVERT(DATETIME, @StartDate, 102) AND CONVERT(DATETIME, @EndDate, 102))
+		AND  GIBS_FBClients.PortalID = @PortalID
+
+
+	GROUP BY dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAFM.ClAddFamMemDOB,GetDate())
+
+
+
+
+end
+GO
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_Age_Groups_Clients]    Script Date: 03/23/2013 06:44:56 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER OFF
+GO
+
+ALTER PROCEDURE  [dbo].[GIBS_FBReports_Age_Groups_Clients] 
+( 
+	@StartDate datetime,
+	@EndDate datetime,
+	@PortalID int
+)
+AS
+
+ 
+begin 
+
+
+--CLIENTS
+	SELECT     
+	                              
+	count( dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClients.ClientDOB,GetDate())) as CLIENT_AgeGroupSum,                             
+	dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClients.ClientDOB,GetDate()) As CLIENT_AgeGroup                                      
+	                              
+	FROM         GIBS_FBClients 
+			INNER JOIN GIBS_FBClientsVisits ON GIBS_FBClients.ClientID = GIBS_FBClientsVisits.ClientID 
+
+		WHERE     (GIBS_FBClientsVisits.VisitDate between  CONVERT(DATETIME, @StartDate, 102) AND CONVERT(DATETIME, @EndDate, 102))
+		AND GIBS_FBClients.PortalID = @PortalID
+
+	GROUP BY dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClients.ClientDOB,GetDate())
+
+
+
+
+
+end
+GO
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_Client_Visit_Details]    Script Date: 03/23/2013 06:44:56 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER OFF
+GO
+
+ALTER PROCEDURE  [dbo].[GIBS_FBReports_Client_Visit_Details] 
+( 
+	@StartDate datetime,
+	@EndDate datetime,
+	@PortalID int
+)
+AS
+
+ 
+begin 
+
+-- DETAILS
+
+	SELECT     GIBS_FBClients.ClientID, 
+		GIBS_FBClients.ClientFirstName + ' ' + GIBS_FBClients.ClientLastName AS ClientFullName,
+		
+		UPPER(GIBS_FBClients.ClientCity) AS ClientCity, 
+		UPPER(GIBS_FBClients.ClientTown) AS ClientTown,
+
+	GIBS_FBClients.ClientZipCode, 
+	 GIBS_FBClientsVisits.VisitDate, 
+	 
+	 cast(dbo.fn_GIBS_FBClients_GetAge(GIBS_FBClients.ClientDOB,GetDate()) as INT) AS ClientAge,
+	 
+	 GIBS_FBClientsVisits.VisitNumBags,
+	 
+	 cast((SELECT     
+			 count(dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate())) 
+			From GIBS_FBClientsAddFamMem
+			where  GIBS_FBClientsAddFamMem.ClientID = GIBS_FBClients.ClientID
+			AND dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate()) = 'Adult'
+			) as INT) As AFM_Adults,
+			
+cast((SELECT     
+			 count(dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate())) 
+			From GIBS_FBClientsAddFamMem
+			where  GIBS_FBClientsAddFamMem.ClientID = GIBS_FBClients.ClientID
+			AND dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate()) = '65 Plus'
+			) as INT) As AFM_65Plus,		
+
+cast((SELECT     
+			 count(dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate())) 
+			From GIBS_FBClientsAddFamMem
+			where  GIBS_FBClientsAddFamMem.ClientID = GIBS_FBClients.ClientID
+			AND dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate()) = 'Children'
+			) as INT) As AFM_Children,		
+						
+			
+cast((SELECT     
+			 count(dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate())) 
+			From GIBS_FBClientsAddFamMem
+			where  GIBS_FBClientsAddFamMem.ClientID = GIBS_FBClients.ClientID
+			AND dbo.fn_GIBS_FBClients_GetAgeGroup(GIBS_FBClientsAddFamMem.ClAddFamMemDOB,GetDate()) = 'No DOB'
+			) as INT) As AFM_NoDOB,
+	 
+ 		cast((SELECT     
+			 count(ClAddFamMemID) 
+			From GIBS_FBClientsAddFamMem
+			where  GIBS_FBClientsAddFamMem.ClientID = GIBS_FBClients.ClientID) as INT) + 1 As HouseholdTotal
+	 
+	FROM         GIBS_FBClients INNER JOIN
+						  GIBS_FBClientsVisits ON GIBS_FBClients.ClientID = GIBS_FBClientsVisits.ClientID
+		WHERE     (GIBS_FBClientsVisits.VisitDate between  CONVERT(DATETIME, @StartDate, 102) AND CONVERT(DATETIME, @EndDate, 102))
+		AND GIBS_FBClients.PortalID = @PortalID
+
+	ORDER BY GIBS_FBClients.ClientCity, GIBS_FBClients.ClientTown, GIBS_FBClients.ClientLastName
+
+
+end
+GO
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_THH_Served]    Script Date: 03/23/2013 06:44:56 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER OFF
+GO
+
+ALTER PROCEDURE  [dbo].[GIBS_FBReports_THH_Served] 
+( 
+	@StartDate datetime,
+	@EndDate datetime,
+	@PortalID int
+)
+AS
+
+begin 
+ 	CREATE TABLE #reportTable (
+		Id int IDENTITY PRIMARY KEY
+		,cCount int
+		 ) 
+	insert into #reportTable(
+		cCount
+		 )
+
+
+	SELECT     
+
+ 		convert( int, (SELECT     
+			 count(ClAddFamMemID) 
+			From GIBS_FBClientsAddFamMem
+			where  GIBS_FBClientsAddFamMem.ClientID = GIBS_FBClients.ClientID) ) + 1 as TotalHH
+	 
+	FROM         GIBS_FBClients INNER JOIN
+						  GIBS_FBClientsVisits ON GIBS_FBClients.ClientID = GIBS_FBClientsVisits.ClientID
+	WHERE     (GIBS_FBClientsVisits.VisitDate between  CONVERT(DATETIME, @StartDate, 102) AND CONVERT(DATETIME, @EndDate, 102))
+	AND GIBS_FBClients.PortalID = @PortalID
+
+	Select sum(cCount) AS THH_Served from #reportTable
+
+
+end
+GO
+
+
