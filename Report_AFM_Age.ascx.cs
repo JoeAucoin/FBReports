@@ -86,13 +86,26 @@ namespace GIBS.Modules.FBReports
             try
             {
 
-			    FBReportsSettings settingsData = new FBReportsSettings(this.TabModuleId);
+                //FBReportsSettings settingsData = new FBReportsSettings(this.TabModuleId);
 
-                if (settingsData.FoodBankClientModuleID != null)
+                //         if (settingsData.FoodBankClientModuleID != null)
+                //         {
+
+                //             string MyReturnURL = settingsData.FoodBankClientModuleID;
+                //             // 65-496
+                //             string s = MyReturnURL;
+                //             string[] parts = s.Split('-');
+                //             string i1 = parts[0];
+                //             string i2 = parts[1];
+
+                //             myModID = Convert.ToInt32(i2);
+                //             myTabID = Convert.ToInt32(i1);
+
+                //         }
+
+                if (Settings.Contains("FoodBankClientModuleID"))
                 {
-
-                    string MyReturnURL = settingsData.FoodBankClientModuleID;
-                    // 65-496
+                    string MyReturnURL = Settings["FoodBankClientModuleID"].ToString();
                     string s = MyReturnURL;
                     string[] parts = s.Split('-');
                     string i1 = parts[0];
@@ -100,7 +113,6 @@ namespace GIBS.Modules.FBReports
 
                     myModID = Convert.ToInt32(i2);
                     myTabID = Convert.ToInt32(i1);
-
                 }
 
                 //Populate the ddlMinAge DropDownList
@@ -299,14 +311,9 @@ namespace GIBS.Modules.FBReports
                 {
                     int clientID = Convert.ToInt32(e.CommandArgument);
 
-                    //   FillIncomeExpenseEdit(ieID);
-
-                    FBReportsSettings settingsData = new FBReportsSettings(this.TabModuleId);
-
-                    if (settingsData.FoodBankClientModuleID != null)
+                    if (Settings.Contains("FoodBankClientModuleID"))
                     {
-
-                        string MyReturnURL = settingsData.FoodBankClientModuleID;
+                        string MyReturnURL = Settings["FoodBankClientModuleID"].ToString();
                         // 65-496
                         string s = MyReturnURL;
                         string[] parts = s.Split('-');
@@ -316,14 +323,7 @@ namespace GIBS.Modules.FBReports
                         int myModID = Convert.ToInt32(i2);
                         int myTabID = Convert.ToInt32(i1);
 
-                        //string SEOPropertyID = GetSetting("SEOPropertyID", myModID);
-                        //string SEOAgentType = GetSetting("SEOAgentType", myModID);
-
-
                         string newURL = Globals.NavigateURL(myTabID, "EditClient", "mid=" + myModID.ToString() + "&cid=" + clientID);
-                    //    lblMessage.Text = newURL.ToString();
-
-                        //Response.Redirect(Globals.NavigateURL(myTabID, "EditClient", "mid=" + myModID.ToString() + "&cid=" + clientID));
 
                     }
 

@@ -13,7 +13,7 @@ using DotNetNuke.Services.Localization;
 
 namespace GIBS.Modules.FBReports
 {
-    public partial class Settings : ModuleSettingsBase
+    public partial class Settings : FBReportsSettings
     {
 
         /// <summary>
@@ -27,14 +27,13 @@ namespace GIBS.Modules.FBReports
                 if (!IsPostBack)
                 {
                     BindModules();
-                    
-                    FBReportsSettings settingsData = new FBReportsSettings(this.TabModuleId);
 
-                    if (settingsData.FoodBankClientModuleID != null)
+                    if (Settings.Contains("FoodBankClientModuleID"))
                     {
+                        drpModuleID.SelectedValue = Settings["FoodBankClientModuleID"].ToString();
 
-                        drpModuleID.SelectedValue = settingsData.FoodBankClientModuleID;
                     }
+
                 }
             }
             catch (Exception ex)
@@ -146,8 +145,8 @@ namespace GIBS.Modules.FBReports
         {
             try
             {
-                FBReportsSettings settingsData = new FBReportsSettings(this.TabModuleId);
-                settingsData.FoodBankClientModuleID = drpModuleID.SelectedValue.ToString();
+               
+                FoodBankClientModuleID = drpModuleID.SelectedValue.ToString();
             }
             catch (Exception ex)
             {
