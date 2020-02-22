@@ -6,16 +6,11 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
-
 using GIBS.FBReports.Components;
 using DotNetNuke.Common;
 using DotNetNuke.Web.UI.WebControls;
-//using Telerik.Web.UI;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Common.Lists;
-
-
-
 
 
 
@@ -23,24 +18,15 @@ namespace GIBS.Modules.FBReports
 {
     public partial class Report_AFM_Age : PortalModuleBase, IActionable
     {
-     
-        
-
         static int myModID = 0;
         static int myTabID = 0;
-     //   bool isPdfExport = false;
-
         
         protected void Page_Load(object sender, EventArgs e)
         {
             
-
             try
             {
                
-             //   this.Controls.Add(new Telerik.Web.UI.RadStyleSheetManager());
-
-
                 if (!IsPostBack)
                 {
 

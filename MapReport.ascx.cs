@@ -89,7 +89,7 @@ namespace GIBS.Modules.FBReports
 
             try
             {
-                string s = "";
+             //   string s = "";
                 DateTime _startDate = DateTime.Parse(txtStartDate.Text.ToString());
                 DateTime _endDate = DateTime.Parse(txtEndDate.Text.ToString());
 
