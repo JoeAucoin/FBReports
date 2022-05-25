@@ -79,7 +79,7 @@
     </Columns>
 </asp:GridView>	
 </div>
-<p><asp:Label ID="lblTHHServed" runat="server" Text=""></asp:Label></p>
+<p><asp:Label ID="lblTHHServed" runat="server" Text="" Visible="false"></asp:Label></p>
 
 
 

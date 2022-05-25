@@ -8,5 +8,5 @@
     <li><asp:HyperLink ID="HyperLink4" runat="server">Form 4</asp:HyperLink></li>
     <li><asp:HyperLink ID="HyperLink5" runat="server">Form 5</asp:HyperLink></li>
     <li><asp:HyperLink ID="HyperLink6" runat="server">Food Report</asp:HyperLink></li>
-     <li><asp:HyperLink ID="HyperLink7" runat="server">Map Report</asp:HyperLink></li>
+     <li><asp:HyperLink ID="HyperLink7" runat="server" Visible="false">Map Report</asp:HyperLink></li>
 </ul>
