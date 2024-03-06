@@ -1,5 +1,5 @@
 ﻿<dotnetnuke type="Package" version="5.0">
-  <packages><package name="GIBS.FBReports" type="Module" version="1.0.22">
+  <packages><package name="GIBS.FBReports" type="Module" version="1.0.23">
   <friendlyName>GIBS Food Bank Reports</friendlyName>
   <description>GIBS Food Bank Reporting Module</description>
   <iconFile />
@@ -78,7 +78,7 @@
         </script>        
         <script type="UnInstall">
           <name>Uninstall.SqlDataProvider</name>
-          <version>1.0.22</version>
+          <version>1.0.23</version>
         </script>
       </scripts>
     </component>

@@ -35,7 +35,7 @@ namespace GIBS.Modules.FBReports
             if (!IsPostBack)
             {
                 txtEndDate.Text = DateTime.Now.ToShortDateString();
-                txtStartDate.Text = DateTime.Now.AddMonths(-1).ToShortDateString();
+                txtStartDate.Text = DateTime.Now.AddDays(-1).ToShortDateString();
                 FillLocationsDropdown();
                
 

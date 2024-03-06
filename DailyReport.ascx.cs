@@ -89,7 +89,7 @@ namespace GIBS.Modules.FBReports
                 ddlLocations.DataSource = MobileLocations;
                 ddlLocations.DataBind();
                 ddlLocations.Items.Insert(0, new ListItem("All Locations", "0"));
-                ddlLocations.Items.Insert(1, new ListItem("Family Pantry", "Pantry"));
+                ddlLocations.Items.Insert(1, new ListItem("Pantry", "Pantry"));
 
             }
             catch (Exception ex)
