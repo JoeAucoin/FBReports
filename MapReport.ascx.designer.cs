@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GIBS.Modules.FBReports {
-    
-    
-    public partial class MapReport {
-        
+namespace GIBS.Modules.FBReports
+{
+
+
+    public partial class MapReport
+    {
+
         /// <summary>
         /// DnnCssInclude2 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DotNetNuke.Web.Client.ClientResourceManagement.DnnCssInclude DnnCssInclude2;
-        
+
         /// <summary>
         /// lblDebug control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDebug;
-        
+
         /// <summary>
         /// btnRunReport control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRunReport;
-        
+
         /// <summary>
         /// lblLocation control.
         /// </summary>
@@ -46,8 +48,8 @@ namespace GIBS.Modules.FBReports {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl lblLocation;
-        
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblLocation;
+
         /// <summary>
         /// ddlLocations control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlLocations;
-        
+
         /// <summary>
         /// lblStartDate control.
         /// </summary>
@@ -64,8 +66,8 @@ namespace GIBS.Modules.FBReports {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl lblStartDate;
-        
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblStartDate;
+
         /// <summary>
         /// txtStartDate control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStartDate;
-        
+
         /// <summary>
         /// reqStartDate control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqStartDate;
-        
+
         /// <summary>
         /// lblEndDate control.
         /// </summary>
@@ -91,8 +93,8 @@ namespace GIBS.Modules.FBReports {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl lblEndDate;
-        
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblEndDate;
+
         /// <summary>
         /// txtEndDate control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEndDate;
-        
+
         /// <summary>
         /// reqEndDate control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqEndDate;
-        
+
         /// <summary>
         /// rptMarkers control.
         /// </summary>

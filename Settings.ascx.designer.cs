@@ -7,11 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GIBS.Modules.FBReports {
-    
-    
-    public partial class Settings {
-        
+namespace GIBS.Modules.FBReports
+{
+
+
+    public partial class Settings
+    {
+
+        /// <summary>
+        /// LabelDebug control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelDebug;
+
         /// <summary>
         /// lblFoodBankClientModuleID control.
         /// </summary>
@@ -19,8 +30,8 @@ namespace GIBS.Modules.FBReports {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl lblFoodBankClientModuleID;
-        
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblFoodBankClientModuleID;
+
         /// <summary>
         /// drpModuleID control.
         /// </summary>
@@ -29,5 +40,23 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drpModuleID;
+
+        /// <summary>
+        /// lblGoogleMapAPIKey control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblGoogleMapAPIKey;
+
+        /// <summary>
+        /// txtGoogleMapAPIKey control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGoogleMapAPIKey;
     }
 }

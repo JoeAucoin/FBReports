@@ -132,4 +132,7 @@
   <data name="SelectModule.Text" xml:space="preserve">
     <value>Select Client Manager Module</value>
   </data>
+  <data name="lblGoogleMapAPIKey.Text" xml:space="preserve">
+    <value>Google Map API Key</value>
+  </data>
 </root>

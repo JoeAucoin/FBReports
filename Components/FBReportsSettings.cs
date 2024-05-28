@@ -33,14 +33,31 @@ namespace GIBS.FBReports.Components
         {
             get
             {
-                if (Settings.Contains("FoodBankClientModuleID"))
-                    return Settings["FoodBankClientModuleID"].ToString();
+                if (Settings.Contains("foodBankClientModuleID"))
+                    return Settings["foodBankClientModuleID"].ToString();
                 return "";
+
             }
             set
             {
                 var mc = new ModuleController();
                 mc.UpdateTabModuleSetting(this.TabModuleId, "foodBankClientModuleID", value.ToString());
+            }
+
+        }
+
+        public string GoogleMapAPIKey
+        {
+            get
+            {
+                if (Settings.Contains("GoogleMapAPIKey"))
+                    return Settings["GoogleMapAPIKey"].ToString();
+                return "";
+            }
+            set
+            {
+                var mc = new ModuleController();
+                mc.UpdateModuleSetting(ModuleId, "GoogleMapAPIKey", value.ToString());
             }
         }
 

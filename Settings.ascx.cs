@@ -27,12 +27,16 @@ namespace GIBS.Modules.FBReports
                 if (!IsPostBack)
                 {
                     BindModules();
+              
 
-                    if (Settings.Contains("FoodBankClientModuleID"))
+                    //GoogleMapAPIKey
+                    if (Settings.Contains("GoogleMapAPIKey"))
                     {
-                        drpModuleID.SelectedValue = Settings["FoodBankClientModuleID"].ToString();
-
+                        txtGoogleMapAPIKey.Text= Settings["GoogleMapAPIKey"].ToString();
+                      
                     }
+
+                 //   LabelDebug.Text = FoodBankClientModuleID.ToString();
 
                 }
             }
@@ -53,13 +57,7 @@ namespace GIBS.Modules.FBReports
             {
                 if (!mi.IsDeleted)
                 {
-                 //   ListItem objListItem = new ListItem();
-
-                    //objListItem.Value = mi.ModuleID.ToString();
-                    //objListItem.Text = mi.ModuleTitle.ToString();
-
-                    //drpModuleID.Items.Add(objListItem);
-
+                 
                     ListItem objListItemPage = new ListItem();
                     objListItemPage.Value = mi.TabID.ToString() + "-" + mi.ModuleID.ToString();
                     objListItemPage.Text = mi.ModuleTitle.ToString();
@@ -70,71 +68,16 @@ namespace GIBS.Modules.FBReports
             }
 
             drpModuleID.Items.Insert(0, new ListItem(Localization.GetString("SelectModule", this.LocalResourceFile), "-1"));
+        
+            if (Settings.Contains("foodBankClientModuleID"))
+            {
+                drpModuleID.SelectedValue = Settings["foodBankClientModuleID"].ToString();
+             //   LabelDebug.Text = Settings["foodBankClientModuleID"].ToString();
+                
+            }
 
         }
 
-        //private void BindModules()
-        //{
-        //    //DotNetNuke.Entities.Modules.DesktopModuleController objDesktopModuleController = new DotNetNuke.Entities.Modules.DesktopModuleController();
-        //    //DesktopModuleInfo objDesktopModuleInfo =  objDesktopModuleController.GetDesktopModuleByModuleName("FBClients");
-
-        //    DotNetNuke.Entities.Modules.DesktopModuleController objDesktopModuleController = new DotNetNuke.Entities.Modules.DesktopModuleController();
-
-
-        //    DotNetNuke.Entities.Modules.DesktopModuleInfo objDesktopModuleInfo = DotNetNuke.Entities.Modules.DesktopModuleController.GetDesktopModuleByModuleName("GIBS.FBClients", PortalId);
-
-
-        //    if ((objDesktopModuleInfo != null))
-        //    {
-        //        TabController objTabController = new TabController();
-        //        ArrayList objTabs = objTabController.GetTabs(PortalId);
-        //        foreach (DotNetNuke.Entities.Tabs.TabInfo objTab in objTabs)
-        //        {
-        //            if ((objTab != null))
-        //            {
-        //                if ((objTab.IsDeleted == false))
-        //                {
-        //                    ModuleController objModules = new ModuleController();
-        //                    foreach (KeyValuePair<int, ModuleInfo> pair in objModules.GetTabModules(objTab.TabID))
-        //                    {
-        //                        ModuleInfo objModule = pair.Value;
-        //                        if ((objModule.IsDeleted == false))
-        //                        {
-        //                            if ((objModule.DesktopModuleID == objDesktopModuleInfo.DesktopModuleID))
-        //                            {
-        //                                //if (PortalSecurity.IsInRoles(objModule.AuthorizedEditRoles) == true & objModule.IsDeleted == false)
-        //                                if (objModule.IsDeleted == false)
-        //                                {
-        //                                    string strPath = objTab.TabName;
-        //                                    TabInfo objTabSelected = objTab;
-        //                                    while (objTabSelected.ParentId != Null.NullInteger)
-        //                                    {
-        //                                        objTabSelected = objTabController.GetTab(objTabSelected.ParentId, objTab.PortalID, false);
-        //                                        if ((objTabSelected == null))
-        //                                        {
-        //                                            break; // TODO: might not be correct. Was : Exit While
-        //                                        }
-        //                                        strPath = objTabSelected.TabName + " -> " + strPath;
-        //                                    }
-
-        //                                    ListItem objListItem = new ListItem();
-
-        //                                    objListItem.Value = objModule.TabID.ToString() + "-" + objModule.ModuleID.ToString();
-        //                                    objListItem.Text = strPath + " -> " + objModule.ModuleTitle;
-
-        //                                    drpModuleID.Items.Add(objListItem);
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-
-        //        drpModuleID.Items.Insert(0, new ListItem(Localization.GetString("SelectModule", this.LocalResourceFile), "-1"));
-
-        //    }
-        //}
 
 
 
@@ -147,6 +90,7 @@ namespace GIBS.Modules.FBReports
             {
                
                 FoodBankClientModuleID = drpModuleID.SelectedValue.ToString();
+                GoogleMapAPIKey = txtGoogleMapAPIKey.Text.ToString();
             }
             catch (Exception ex)
             {

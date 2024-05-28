@@ -1,0 +1,96 @@
+﻿<dotnetnuke type="ResourceFile" version="5.0">
+  <files>
+    <file>
+      <path>Documentation/</path>
+      <name>Documentation.css</name>
+    </file>
+    <file>
+      <path>Documentation/</path>
+      <name>Documentation.html</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>DailyReport.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>DistinctClientsReport.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>EditFBReports.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>FoodReport.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>HouseholdTotal_Report.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>MapReport.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>NewClientsReport.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>Report_AFM_Age.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>Settings.ascx.resx</name>
+    </file>
+    <file>
+      <path>App_LocalResources/</path>
+      <name>ViewFBReports.ascx.resx</name>
+    </file>
+    <file>
+      <path />
+      <name>DailyReport.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>DistinctClientsReport.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>EditFBReports.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>FoodReport.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>HouseholdTotal_Report.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>MapReport.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>NewClientsReport.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>Report_AFM_Age.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>Settings.ascx</name>
+    </file>
+    <file>
+      <path />
+      <name>Style.css</name>
+    </file>
+    <file>
+      <path />
+      <name>ViewFBReports.ascx</name>
+    </file>
+  </files>
+</dotnetnuke>

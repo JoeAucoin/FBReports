@@ -40,7 +40,7 @@
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDo9jmzvNKckTh528_mFgXbzbvqOy11HE0&callback=load" type="text/javascript"></script>                		    
+<script async defer src='<%=GetGoogleURL() %>' type="text/javascript"></script>                		    
 <script type="text/javascript">
 
     var markers = [<asp:Repeater ID="rptMarkers" runat="server">

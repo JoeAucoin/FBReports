@@ -110,9 +110,7 @@
     <Compile Include="Components\DataProvider.cs" />
     <Compile Include="Components\FBReportsController.cs" />
     <Compile Include="Components\FBReportsInfo.cs" />
-    <Compile Include="Components\FBReportsSettings.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="Components\FBReportsSettings.cs" />
     <Compile Include="Components\GridViewExportUtil.cs" />
     <Compile Include="Components\GridViewGroup.cs" />
     <Compile Include="Components\GridViewGroupList.cs" />
@@ -294,7 +292,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1193</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://dnn9.com/DesktopModules/GIBS/FBReports</IISUrl>
+          <IISUrl>http://dnn7.com/DesktopModules/GIBS/FBReports</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

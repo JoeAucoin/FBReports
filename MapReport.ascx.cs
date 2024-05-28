@@ -21,6 +21,8 @@ namespace GIBS.Modules.FBReports
     public partial class MapReport : PortalModuleBase
     {
 
+        static string GoogleMapKey;
+
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
@@ -34,6 +36,7 @@ namespace GIBS.Modules.FBReports
         {
             if (!IsPostBack)
             {
+                GetSettings();
                 txtEndDate.Text = DateTime.Now.ToShortDateString();
                 txtStartDate.Text = DateTime.Now.AddDays(-1).ToShortDateString();
                 FillLocationsDropdown();
@@ -43,6 +46,42 @@ namespace GIBS.Modules.FBReports
             }
 
         }
+
+        public void GetSettings()
+        {
+
+            try
+            {
+                if (Settings.Contains("GoogleMapAPIKey"))
+                {
+                   
+                    GoogleMapKey = Settings["GoogleMapAPIKey"].ToString();
+                    
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Exceptions.ProcessModuleLoadException(this, ex);
+            }
+
+        }
+
+        public string GetGoogleURL()
+        {
+            if (Settings.Contains("GoogleMapAPIKey"))
+            {
+
+                GoogleMapKey = Settings["GoogleMapAPIKey"].ToString();
+
+            }
+
+            return string.Format(GoogleMapKey);
+
+
+        }
+
+
 
         public void FillLocationsDropdown()
         {
