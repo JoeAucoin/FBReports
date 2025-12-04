@@ -36,7 +36,7 @@
             </asp:DropDownList>
 		</div>
 
-		<div class="dnnFormItem">
+		<div class="dnnFormItem" style="display:none;">
             <dnn:Label ID="lblStartDate" runat="server" CssClass="dnnFormLabel" AssociatedControlID="txtStartDate" Text="Start Date" />
             <asp:TextBox ID="txtStartDate" runat="server" ClientIDMode="Static" /><asp:RequiredFieldValidator runat="server" id="reqStartDate" controltovalidate="txtStartDate" ResourceKey="RequiredStartDate" />
         </div>
@@ -54,32 +54,6 @@
     </fieldset>
 </div>	
    
-
-
-<div style="float:left; padding-right:20px;">
-<asp:GridView ID="gv_Age_Groups_Clients" runat="server" Width="250px" AutoGenerateColumns="False" CssClass="mGridFlex" resourcekey="gv_Age_Groups_Clients" >
-<AlternatingRowStyle CssClass="alt" />    
-<PagerStyle CssClass="pgr" />  
-<PagerSettings Mode="NumericFirstLast" /> 
-    <Columns>
-       <asp:BoundField HeaderText="Client Age Group" DataField="Client_AgeGroup" ItemStyle-VerticalAlign="Top" ></asp:BoundField>
-        <asp:BoundField HeaderText="Count" DataField="Client_AgeGroupSum" ItemStyle-VerticalAlign="Top" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"></asp:BoundField>
-    </Columns>
-</asp:GridView>	
-</div>
-
-<div>
-<asp:GridView ID="gv_Age_Groups_AFM" runat="server" Width="250px" AutoGenerateColumns="False" CssClass="mGridFlex" resourcekey="gv_Age_Groups_AFM" >
-<AlternatingRowStyle CssClass="alt" />    
-<PagerStyle CssClass="pgr" />  
-<PagerSettings Mode="NumericFirstLast" /> 
-    <Columns>
-       <asp:BoundField HeaderText="AFM Age Group" DataField="AFM_AgeGroup" ItemStyle-VerticalAlign="Top" ></asp:BoundField>
-        <asp:BoundField HeaderText="Count" DataField="AFM_AgeGroupSum" ItemStyle-VerticalAlign="Top" ItemStyle-Width="70px" ItemStyle-HorizontalAlign="Center"></asp:BoundField>
-    </Columns>
-</asp:GridView>	
-</div>
-<p><asp:Label ID="lblTHHServed" runat="server" Text=""></asp:Label></p>
 
 
 

@@ -35,12 +35,12 @@ namespace GIBS.Modules.FBReports
                 //radEndDate.SelectedDate = DateTime.Today;
                 //radStartDate.SelectedDate = DateTime.Now.AddDays(-7);
                 txtEndDate.Text = DateTime.Now.ToShortDateString();
-                txtStartDate.Text = DateTime.Now.AddDays(-7).ToShortDateString();
+                txtStartDate.Text = DateTime.Now.AddDays(-1).ToShortDateString();
 
                 // RUN REPORT
-                GetTotalInHouseholdServed();
-                Fill_Age_Groups_AFM();
-                Fill_Age_Groups_Clients();
+                //GetTotalInHouseholdServed();
+                //Fill_Age_Groups_AFM();
+                //Fill_Age_Groups_Clients();
                 GroupIt();
                 Fill_ClientsDetails();
                   //  txtEndDate.Text = 
@@ -62,9 +62,9 @@ namespace GIBS.Modules.FBReports
             try
             {
                
-                GetTotalInHouseholdServed();
-                Fill_Age_Groups_AFM();
-                Fill_Age_Groups_Clients();
+                //GetTotalInHouseholdServed();
+                //Fill_Age_Groups_AFM();
+                //Fill_Age_Groups_Clients();
                 GroupIt();
                 Fill_ClientsDetails();
                 
@@ -100,85 +100,85 @@ namespace GIBS.Modules.FBReports
         }				
 
 
-        public void GetTotalInHouseholdServed()
-        {
+        //public void GetTotalInHouseholdServed()
+        //{
 
-            try
-            {
-                DateTime _startDate = DateTime.Parse(txtStartDate.Text.ToString());
-                DateTime _endDate = DateTime.Parse(txtEndDate.Text.ToString());
+        //    try
+        //    {
+        //        DateTime _startDate = DateTime.Parse(txtStartDate.Text.ToString());
+        //        DateTime _endDate = DateTime.Parse(txtEndDate.Text.ToString());
 
-                FBReportsController controller = new FBReportsController();
-                FBReportsInfo item = controller.FBReports_THH_Served(_startDate, _endDate, this.PortalId, ddlLocations.SelectedValue.ToString());
-
-
-                //lblTHHServed
-                if (item != null)
-                {
-                    lblTHHServed.Text = "Total Clients & Family Served: " + item.THH_Served.ToString();
-                }
-                else
-                {
-                    lblTHHServed.Text = "No Results";
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Exceptions.ProcessModuleLoadException(this, ex);
-            }
-
-        }
+        //        FBReportsController controller = new FBReportsController();
+        //        FBReportsInfo item = controller.FBReports_THH_Served(_startDate, _endDate, this.PortalId, ddlLocations.SelectedValue.ToString());
 
 
-        public void Fill_Age_Groups_AFM()
-        {
+        //        //lblTHHServed
+        //        if (item != null)
+        //        {
+        //            lblTHHServed.Text = "Total Clients & Family Served: " + item.THH_Served.ToString();
+        //        }
+        //        else
+        //        {
+        //            lblTHHServed.Text = "No Results";
+        //        }
 
-            try
-            {
-                DateTime _startDate = DateTime.Parse(txtStartDate.Text.ToString());
-                DateTime _endDate = DateTime.Parse(txtEndDate.Text.ToString());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Exceptions.ProcessModuleLoadException(this, ex);
+        //    }
+
+        //}
+
+
+        //public void Fill_Age_Groups_AFM()
+        //{
+
+        //    try
+        //    {
+        //        DateTime _startDate = DateTime.Parse(txtStartDate.Text.ToString());
+        //        DateTime _endDate = DateTime.Parse(txtEndDate.Text.ToString());
                 
-                List<FBReportsInfo> items;
-                FBReportsController controller = new FBReportsController();
+        //        List<FBReportsInfo> items;
+        //        FBReportsController controller = new FBReportsController();
 
-                items = controller.FBReports_Age_Groups_AFM(_startDate, _endDate, this.PortalId, ddlLocations.SelectedValue.ToString());
+        //        items = controller.FBReports_Age_Groups_AFM(_startDate, _endDate, this.PortalId, ddlLocations.SelectedValue.ToString());
 
-                gv_Age_Groups_AFM.DataSource = items;
-                gv_Age_Groups_AFM.DataBind();
+        //        gv_Age_Groups_AFM.DataSource = items;
+        //        gv_Age_Groups_AFM.DataBind();
 
 
-            }
-            catch (Exception ex)
-            {
-                Exceptions.ProcessModuleLoadException(this, ex);
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Exceptions.ProcessModuleLoadException(this, ex);
+        //    }
 
-        }
+        //}
 
-        public void Fill_Age_Groups_Clients()
-        {
+        //public void Fill_Age_Groups_Clients()
+        //{
 
-            try
-            {
-                DateTime _startDate = DateTime.Parse(txtStartDate.Text.ToString());
-                DateTime _endDate = DateTime.Parse(txtEndDate.Text.ToString());
+        //    try
+        //    {
+        //        DateTime _startDate = DateTime.Parse(txtStartDate.Text.ToString());
+        //        DateTime _endDate = DateTime.Parse(txtEndDate.Text.ToString());
 
-                List<FBReportsInfo> items;
-                FBReportsController controller = new FBReportsController();
+        //        List<FBReportsInfo> items;
+        //        FBReportsController controller = new FBReportsController();
 
-                items = controller.FBReports_Age_Groups_Clients(_startDate, _endDate, this.PortalId, ddlLocations.SelectedValue.ToString());
+        //        items = controller.FBReports_Age_Groups_Clients(_startDate, _endDate, this.PortalId, ddlLocations.SelectedValue.ToString());
 
-                gv_Age_Groups_Clients.DataSource = items;
-                gv_Age_Groups_Clients.DataBind();
+        //        gv_Age_Groups_Clients.DataSource = items;
+        //        gv_Age_Groups_Clients.DataBind();
                 
-            }
-            catch (Exception ex)
-            {
-                Exceptions.ProcessModuleLoadException(this, ex);
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Exceptions.ProcessModuleLoadException(this, ex);
+        //    }
 
-        }
+        //}
 
         //gv_ClientDetails
 
