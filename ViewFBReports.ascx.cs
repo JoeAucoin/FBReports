@@ -28,6 +28,9 @@ namespace GIBS.Modules.FBReports
             HyperLink6.NavigateUrl = Globals.NavigateURL(this.TabId, "FoodReport", "mid=" + ModuleId.ToString());
             HyperLink6.Text = "Food Inventory Report";
 
+            HyperLink8.NavigateUrl = Globals.NavigateURL(this.TabId, "FoodOrderReport", "mid=" + ModuleId.ToString());
+            HyperLink8.Text = "Food Order/Menu Report";
+
             HyperLink7.NavigateUrl = Globals.NavigateURL(this.TabId, "MapReport", "mid=" + ModuleId.ToString());
             //    AFMAgeReport
 

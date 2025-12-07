@@ -1,5 +1,5 @@
 ﻿<dotnetnuke type="Package" version="5.0">
-  <packages><package name="GIBS.FBReports" type="Module" version="1.0.24">
+  <packages><package name="GIBS.FBReports" type="Module" version="1.0.25">
   <friendlyName>GIBS Food Bank Reports</friendlyName>
   <description>GIBS Food Bank Reporting Module</description>
   <iconFile />
@@ -75,10 +75,15 @@
           <path>SqlScripts</path>
           <name>01.00.18.SqlDataProvider</name>
           <version>01.00.18</version>
-        </script>        
+        </script>
+        <script type="Install">
+          <path>SqlScripts</path>
+          <name>01.00.25.SqlDataProvider</name>
+          <version>01.00.25</version>
+        </script>
         <script type="UnInstall">
           <name>Uninstall.SqlDataProvider</name>
-          <version>1.0.24</version>
+          <version>1.0.25</version>
         </script>
       </scripts>
     </component>
@@ -157,7 +162,17 @@
                 <supportsPopUps>False</supportsPopUps>
                 <viewOrder>2</viewOrder>
               </moduleControl>
-             
+              <moduleControl>
+                <controlKey>FoodOrderReport</controlKey>
+                <controlSrc>DesktopModules/GIBS/FBReports/FoodOrder.ascx</controlSrc>
+                <supportsPartialRendering>False</supportsPartialRendering>
+                <controlTitle>Food Order/Menu Report</controlTitle>
+                <controlType>View</controlType>
+                <iconFile />
+                <helpUrl />
+                <supportsPopUps>False</supportsPopUps>
+                <viewOrder>2</viewOrder>
+              </moduleControl>            
               <moduleControl>
                 <controlKey>HouseholdTotal_Report</controlKey>
                 <controlSrc>DesktopModules/GIBS/FBReports/HouseholdTotal_Report.ascx</controlSrc>

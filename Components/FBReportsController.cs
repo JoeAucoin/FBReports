@@ -14,7 +14,10 @@ namespace GIBS.FBReports.Components
 
         #region public method
 
-        //FBReports_New_Clients_Report_THH
+        public List<FBReportsInfo> FBReports_GetFoodOrderMenu()
+        {
+            return CBO.FillCollection<FBReportsInfo>(DataProvider.Instance().FBReports_GetFoodOrderMenu());
+        }
 
         public FBReportsInfo FBReports_New_Clients_Report_THH(DateTime startDate, DateTime endDate, int portalId, string serviceLocation)
         {

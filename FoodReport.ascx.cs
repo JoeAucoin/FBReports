@@ -11,7 +11,7 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using System.Linq;
 using GIBS.FBReports.Components;
-using GIBS.FBFoodInventory.Components;
+//using GIBS.FBFoodInventory.Components;
 using DotNetNuke.Common;
 using System.Drawing;
 using System.Data;
@@ -72,29 +72,29 @@ namespace GIBS.Modules.FBReports
 
             try
             {
-                DateTime _startDate = DateTime.Parse(txtStartDate.Text.ToString());
-                DateTime _endDate = DateTime.Parse(txtEndDate.Text.ToString());
+                //DateTime _startDate = DateTime.Parse(txtStartDate.Text.ToString());
+                //DateTime _endDate = DateTime.Parse(txtEndDate.Text.ToString());
 
                 
-                List<FBFoodInventoryInfo> items;
+                //List<FBFoodInventoryInfo> items;
                 
-                FBFoodInventoryController controller = new FBFoodInventoryController();
+                //FBFoodInventoryController controller = new FBFoodInventoryController();
 
-                items = controller.FBReports_Food_Inventory(_startDate, _endDate, this.PortalId);
+                //items = controller.FBReports_Food_Inventory(_startDate, _endDate, this.PortalId);
 
-                if (rblGroupBy.SelectedValue.ToString().ToLower() == "reporttype")
-                {
-                    var so = from FBFoodInventoryInfo s in items orderby s.ReportType ascending select s;
+                //if (rblGroupBy.SelectedValue.ToString().ToLower() == "reporttype")
+                //{
+                //    var so = from FBFoodInventoryInfo s in items orderby s.ReportType ascending select s;
                     
-                    gv_ClientDetails.DataSource = so;
-                    gv_ClientDetails.DataBind();
-                }
-                else
-                {
-                    var so = from FBFoodInventoryInfo s in items orderby s.SupplierName, s.ReportType, s.ProductName select s;
-                    gv_ClientDetails.DataSource = so;
-                    gv_ClientDetails.DataBind();
-                }
+                //    gv_ClientDetails.DataSource = so;
+                //    gv_ClientDetails.DataBind();
+                //}
+                //else
+                //{
+                //    var so = from FBFoodInventoryInfo s in items orderby s.SupplierName, s.ReportType, s.ProductName select s;
+                //    gv_ClientDetails.DataSource = so;
+                //    gv_ClientDetails.DataBind();
+                //}
 
 
 

@@ -106,6 +106,14 @@ namespace GIBS.FBReports.Components
         private string tfQuestion;
         private bool tfAnswer;
 
+        //OrderingMenu
+        private int productID;
+        private string productName;
+        private string productCategory;
+        private int limit;
+        private string orderingInstructions;
+        private string limitQuantities;
+
 
         /// <summary>
         /// empty cstor
@@ -116,6 +124,42 @@ namespace GIBS.FBReports.Components
 
 
         #region properties
+
+        public int ProductID
+        {
+            get { return productID; }
+            set { productID = value; }
+        }
+
+        public string ProductName
+        {
+            get { return productName; }
+            set { productName = value; }
+        }
+
+        public string ProductCategory
+            {
+            get { return productCategory; }
+            set { productCategory = value; }
+        }
+
+        public int Limit
+            {
+            get { return limit; }
+            set { limit = value; }
+        }
+
+        public string OrderingInstructions
+            {
+            get { return orderingInstructions; }
+            set { orderingInstructions = value; }
+        }
+
+        public string LimitQuantities
+            {
+            get { return limitQuantities; }
+            set { limitQuantities = value; }
+        }
 
         //ServiceLocation
         public string ServiceLocation

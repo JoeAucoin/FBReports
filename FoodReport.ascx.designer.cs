@@ -7,11 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GIBS.Modules.FBReports {
-    
-    
-    public partial class FoodReport {
-        
+namespace GIBS.Modules.FBReports
+{
+
+
+    public partial class FoodReport
+    {
+
+        /// <summary>
+        /// dnnjQuery control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+      
+
         /// <summary>
         /// DnnCssInclude1 control.
         /// </summary>
@@ -20,7 +31,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DotNetNuke.Web.Client.ClientResourceManagement.DnnCssInclude DnnCssInclude1;
-        
+
         /// <summary>
         /// DnnCssInclude2 control.
         /// </summary>
@@ -29,7 +40,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DotNetNuke.Web.Client.ClientResourceManagement.DnnCssInclude DnnCssInclude2;
-        
+
         /// <summary>
         /// btnRunReport control.
         /// </summary>
@@ -38,7 +49,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRunReport;
-        
+
         /// <summary>
         /// lblStartDate control.
         /// </summary>
@@ -47,7 +58,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DotNetNuke.UI.UserControls.LabelControl lblStartDate;
-        
+
         /// <summary>
         /// txtStartDate control.
         /// </summary>
@@ -56,7 +67,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStartDate;
-        
+
         /// <summary>
         /// reqStartDate control.
         /// </summary>
@@ -65,7 +76,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqStartDate;
-        
+
         /// <summary>
         /// lblEndDate control.
         /// </summary>
@@ -74,7 +85,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DotNetNuke.UI.UserControls.LabelControl lblEndDate;
-        
+
         /// <summary>
         /// txtEndDate control.
         /// </summary>
@@ -83,7 +94,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEndDate;
-        
+
         /// <summary>
         /// reqEndDate control.
         /// </summary>
@@ -92,7 +103,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqEndDate;
-        
+
         /// <summary>
         /// lblGroupBy control.
         /// </summary>
@@ -101,7 +112,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DotNetNuke.UI.UserControls.LabelControl lblGroupBy;
-        
+
         /// <summary>
         /// rblGroupBy control.
         /// </summary>
@@ -110,7 +121,7 @@ namespace GIBS.Modules.FBReports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblGroupBy;
-        
+
         /// <summary>
         /// gv_ClientDetails control.
         /// </summary>

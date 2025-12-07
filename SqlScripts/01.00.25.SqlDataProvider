@@ -1,0 +1,42 @@
+﻿
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_GetFoodOrderMenu]    Script Date: 12/6/2025 8:20:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GIBS_FBReports_GetFoodOrderMenu]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[GIBS_FBReports_GetFoodOrderMenu]
+GO
+
+/****** Object:  StoredProcedure [dbo].[GIBS_FBReports_GetFoodOrderMenu]    Script Date: 12/6/2025 8:20:03 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Joseph Aucoin
+-- Create date: 12/06/2025
+-- Description:	Food Pantry Client Order List (Menu)
+-- =============================================
+
+CREATE PROCEDURE [dbo].[GIBS_FBReports_GetFoodOrderMenu]
+	-- Add the parameters for the stored procedure 
+
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+			SELECT GIBS_FBProducts.ProductID, GIBS_FBProducts.ProductName, GIBS_FBProductCategory.ProductCategory, GIBS_FBProducts.Limit,  
+			GIBS_FBProductCategory.OrderingInstructions, 
+			coalesce(GIBS_FBProducts.LimitQuantities,'') AS LimitQuantities
+			FROM    GIBS_FBProductCategory INNER JOIN
+					GIBS_FBProducts ON GIBS_FBProductCategory.ProductCategoryID = GIBS_FBProducts.ProductCategoryID 
+				WHERE GIBS_FBProducts.isActive = 1
+				ORDER BY GIBS_FBProductCategory.SortOrder, ProductCategory, GIBS_FBProducts.ProductName
+
+
+	return
+
+END
+GO
+
+

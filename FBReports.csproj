@@ -123,6 +123,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Components\SqlDataProvider.cs" />
+    <Compile Include="FoodOrder.ascx.cs">
+      <DependentUpon>FoodOrder.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FoodOrder.ascx.designer.cs">
+      <DependentUpon>FoodOrder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="FoodReport.ascx.cs">
+      <DependentUpon>FoodReport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FoodReport.ascx.designer.cs">
+      <DependentUpon>FoodReport.ascx</DependentUpon>
+    </Compile>
     <Compile Include="MapReport.ascx.cs">
       <DependentUpon>MapReport.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -189,6 +203,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FoodOrder.ascx" />
+    <Content Include="FoodReport.ascx" />
     <Content Include="MapReport.ascx" />
     <Content Include="Report_AFM_Age.ascx" />
     <Content Include="DistinctClientsReport.ascx" />
@@ -217,6 +233,7 @@
     <None Include="SqlScripts\01.00.13.SqlDataProvider" />
     <Content Include="SqlScripts\01.00.18.SqlDataProvider" />
     <None Include="SqlScripts\01.00.14.SqlDataProvider" />
+    <Content Include="SqlScripts\01.00.25.SqlDataProvider" />
     <None Include="Uninstall.SqlDataProvider" />
     <Content Include="DailyReport.ascx" />
     <Content Include="web.config" />

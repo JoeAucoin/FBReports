@@ -91,6 +91,11 @@ namespace GIBS.FBReports.Components
 
         #region override methods
 
+        public override IDataReader FBReports_GetFoodOrderMenu()
+        {
+            return (IDataReader)SqlHelper.ExecuteReader(connectionString, GetFullyQualifiedName("FBReports_GetFoodOrderMenu"));
+        }
+
         //FBReports_New_Clients_Report_THH
         public override IDataReader FBReports_New_Clients_Report_THH(DateTime startDate, DateTime endDate, int portalId, string serviceLocation)
         {

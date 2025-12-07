@@ -48,6 +48,7 @@ namespace GIBS.FBReports.Components
         // FBReports_Client_Visit_Details
         //FBReports_New_Clients_Report_THH
 
+        public abstract IDataReader FBReports_GetFoodOrderMenu();
 
         public abstract IDataReader FBReports_New_Clients_Report_THH(DateTime startDate, DateTime endDate, int portalId, string serviceLocation);
 
